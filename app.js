@@ -1,15 +1,16 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
 var app = express();
+
+var database = {
+  "name" : "Steve Jobs",
+  "address" : "707 W. 28th Street, Los Angeles",
+  "price" : 10,
+  "startTime" : "12",
+  "endTime" : "16"
+};
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -28,13 +29,32 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-
-app.get('/hello', function(req, res) {
-	res.end("Hello World!");
+app.get('/', function(req, res) {
+	// send back default data
+	res.json(database);
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+app.post('/add', function(req, res) {
+	body = req.body;
+  	console.log("/add - " + body);
+
+
+  	var name = body.name,
+  		address = body.address,
+  		price = body.price,
+  		startTime = body.startTime,
+  		endTime = body.endTime;
+
+  	// put data into mongo
+
+  	// assuming always ok
+  	var response = {
+  		"status": "ok"
+  	};
+  	res.json(response);
+});
+
+
+var server = http.createServer(app).listen(app.get('port'), function(){
+  console.log('Parking app server listening on port ' + app.get('port'));
 });
