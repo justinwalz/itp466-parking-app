@@ -29,9 +29,11 @@ var joe = {
 };
 
 var database = {
-	"1": steve,
-	"2": cindy,
-	"3": joe
+	"spots": [
+		steve, 
+		cindy,
+		joe
+	]
 };
 
 // all environments
