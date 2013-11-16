@@ -7,6 +7,7 @@ var app = express();
 var steve = {
   "name" : "Steve Jobs",
   "address" : "707 W. 28th Street, Los Angeles CA 90007",
+  "latlng" : [ 34.0272891, -118.2796585],
   "price" : 10,
   "startTime" : "12",
   "endTime" : "16"
@@ -15,6 +16,7 @@ var steve = {
 var cindy = {
   "name" : "Cindy Smith",
   "address" : "667 W. 28th Street, Los Angeles CA 90007",
+  "latlng" : [ 34.0272142, -118.2792991],
   "price" : 15,
   "startTime" : "9",
   "endTime" : "10"
@@ -23,6 +25,7 @@ var cindy = {
 var joe = {
   "name" : "Joe Shmoe",
   "address" : "653 W. 28th Street, Los Angeles CA 90007",
+  "latlng" : [ 34.027166, -118.278965],
   "price" : 8,
   "startTime" : "18",
   "endTime" : "21"
@@ -47,13 +50,16 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static'))); 
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res) {
+// app.get("/") is returned by static join above
+
+app.get('/sample.json', function(req, res) {
 	// send back default data
 	res.json(database);
 });
