@@ -36,7 +36,8 @@ app.get('/', function(req, res) {
 
 app.post('/add', function(req, res) {
 	body = req.body;
-  	console.log("/add - " + body);
+	var string = JSON.parse(body);
+  	console.log("/add - " + string);
 
 
   	var name = body.name,
@@ -44,6 +45,7 @@ app.post('/add', function(req, res) {
   		price = body.price,
   		startTime = body.startTime,
   		endTime = body.endTime;
+
 
   	// put data into mongo
 
