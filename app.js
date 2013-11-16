@@ -4,12 +4,34 @@ var path = require('path');
 
 var app = express();
 
-var database = {
+var steve = {
   "name" : "Steve Jobs",
-  "address" : "707 W. 28th Street, Los Angeles",
+  "address" : "707 W. 28th Street, Los Angeles CA 90007",
   "price" : 10,
   "startTime" : "12",
   "endTime" : "16"
+};
+
+var cindy = {
+  "name" : "Cindy Smith",
+  "address" : "667 W. 28th Street, Los Angeles CA 90007",
+  "price" : 15,
+  "startTime" : "9",
+  "endTime" : "10"
+};
+
+var joe = {
+  "name" : "Joe Shmoe",
+  "address" : "653 W. 28th Street, Los Angeles CA 90007",
+  "price" : 8,
+  "startTime" : "18",
+  "endTime" : "21"
+};
+
+var database = {
+	"1": steve,
+	"2": cindy,
+	"3": joe
 };
 
 // all environments
@@ -36,9 +58,6 @@ app.get('/', function(req, res) {
 
 app.post('/add', function(req, res) {
 	body = req.body;
-	var string = JSON.parse(body);
-  	console.log("/add - " + string);
-
 
   	var name = body.name,
   		address = body.address,
@@ -46,6 +65,9 @@ app.post('/add', function(req, res) {
   		startTime = body.startTime,
   		endTime = body.endTime;
 
+  	// print
+  	console.log(name + ", " + address + ". "); 
+    console.log(price + " from " + startTime + " to " + endTime);
 
   	// put data into mongo
 
