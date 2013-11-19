@@ -4,6 +4,7 @@ var path = require('path');
 
 var app = express();
 
+/* This is default data before a real database is built */
 var steve = {
   "name" : "Steve Jobs",
   "address" : "707 W. 28th Street, Los Angeles CA 90007",
@@ -59,11 +60,13 @@ if ('development' == app.get('env')) {
 
 // app.get("/") is returned by static join above
 
+// get the sample database
 app.get('/sample.json', function(req, res) {
 	// send back default data
 	res.json(database);
 });
 
+// add to the sample database
 app.post('/add', function(req, res) {
 	body = req.body;
 
@@ -77,7 +80,16 @@ app.post('/add', function(req, res) {
   	console.log(name + ", " + address + ". "); 
     console.log(price + " from " + startTime + " to " + endTime);
 
-  	// put data into mongo
+  	// put data into psuedo db
+	var newItem = {
+	  "name" : name,
+	  "address" : address,
+	  "latlng" : [ 34.0272142, -118.2792991],
+	  "price" : price,
+	  "startTime" : startTime,
+	  "endTime" : endTime
+	};
+  	database.spots.unshift(newItem);
 
   	// assuming always ok
   	var response = {

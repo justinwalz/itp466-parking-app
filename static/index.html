@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="parkingApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Parking App - Home</title>
+    <link href="lib/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+      body { margin-top: 60px; }
+
+      .msg {
+        border-style: solid;
+        border-radius: 10px;
+        border-width: 1px;
+        font-size: 25px;
+      }
+
+      #submit {
+        margin: 10px 0px;
+      }
+    </style>
+  </head>
+
+  <body ng-controller="ParkingCtrl">
+    <!-- Header bar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Parking App Skeleton</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <!-- Add your own pages here! -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+    <div class="container">
+
+      <!-- Form to send -->
+        Name:     <input type="text" id="name"><br>
+        Address:  <input type="text" id="address"><br>
+        Price:    <input type="text" id="price"><br>
+        Start:    <input type="text" id="startTime"><br>
+        End:      <input type="text" id="endTime"><br>        
+        <button ng-click="addLocation()" type="button" class="btn btn-primary" id="submit" >Submit</button>
+
+      <!-- Text area to send 
+      <div class="col-lg-6 col-lg-offset-3">
+        <textarea ng-model="currMsg" class="form-control" rows="3"></textarea>
+        <button ng-click="sendMsg()" type="button" class="btn btn-primary pull-right" id="submit" >Submit</button>
+      </div>
+      -->
+      <!-- Render messages retrieved from server with a simple template 
+      <ul class="list-unstyled" style="margin-top: 50px">
+        <li ng-repeat="msg in msgs" class="col-lg-6 col-lg-offset-3 well">
+          <h4>{{msg.date}}</h4>
+          <p>{{msg.msg}}</p>
+        </li>
+      </ul>
+    -->
+    <h2>From DB...</h2>
+    <div id="db">
+      No data received...
+    </div>
+
+    </div>
+
+    <script src="lib/js/angular.js"></script>
+    <script src="js/controllers.js"></script>
+  </body>
+</html>
