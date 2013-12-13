@@ -1,7 +1,14 @@
-var express = require('express');
-var http = require('http');
-var path = require('path');
+// packages we use...
 
+// http - http://nodejs.org/api/http.html
+var http = require('http');
+// express.js - http://expressjs.com
+var express = require('express');
+// path - http://nodejs.org/api/path.html
+var path = require('path');
+// Google Maps - to geocode our addresses
+var gm = require('googlemaps');
+// create our app using express
 var app = express();
 
 /* This is default data before a real database is built */
@@ -68,34 +75,48 @@ app.get('/sample.json', function(req, res) {
 
 // add to the sample database
 app.post('/add', function(req, res) {
+
+  // get the body of the request
 	body = req.body;
 
-  	var name = body.name,
-  		address = body.address,
-  		price = body.price,
-  		startTime = body.startTime,
-  		endTime = body.endTime;
+  // get all fields
+	var name = body.name,
+		  address = body.address,
+		  price = body.price,
+		  startTime = body.startTime,
+		  endTime = body.endTime;
 
+
+
+
+  if (!name || !address || !price || !startTime || !endTime) {
+    console.log("invalid post request");
+    var response = {
+      "status": "fail. incomplete fields"
+    }
+    res.json(response);
+  } else {
+    
   	// print
   	console.log(name + ", " + address + ". "); 
     console.log(price + " from " + startTime + " to " + endTime);
 
-  	// put data into psuedo db
-	var newItem = {
-	  "name" : name,
-	  "address" : address,
-	  "latlng" : [ 34.0272142, -118.2792991],
-	  "price" : price,
-	  "startTime" : startTime,
-	  "endTime" : endTime
-	};
-  	database.spots.unshift(newItem);
+    var newItem = {
+      "name" : name,
+      "address" : address,
+      "latlng" : [ 0, 0],
+      "price" : price,
+      "startTime" : startTime,
+      "endTime" : endTime
+    };
+    database.spots.unshift(newItem);
 
-  	// assuming always ok
-  	var response = {
-  		"status": "ok"
-  	};
-  	res.json(response);
+    // assuming always ok
+    var response = {
+      "status": "ok"
+    };
+    res.json(response);
+  }
 });
 
 
