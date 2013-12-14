@@ -10,12 +10,19 @@ html(ng-app="parkingApp")
 			#submit {margin: 10px 0px}
 			input {margin-top:5px}
 			#box {border: 1px solid black;}
+		script.
+			alert(#{session})
+			if (#{session}) {
+				alert("signed in");
+			} else {
+				alert("not signed in... " + #{session});
+			}
 
 	body(ng-controller="ParkingCtrl")
 		nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
 			#container
 				#navbar-header
-					a.navbar-brand(href="index.html") Parking App Skeleton
+					a.navbar-brand(href="/") Parking App Skeleton
 
 				.collapse.navbar-collapse.navbar-ex1-collapse
 					ul.nav.navbar-nav
@@ -36,6 +43,11 @@ html(ng-app="parkingApp")
 
 			h2 From Db...
 			#db No Data...
+
+			br
+			br
+			p ------
+			p Parq Apps. All rights reserved.
 
 			script(type="text/javascript", src="lib/js/angular.js")
 			script(type="text/javascript", src="js/controllers.js")
