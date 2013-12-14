@@ -8,6 +8,8 @@ var path = require('path');
 var request = require('request');
 var async = require('async');
 
+var routes = require("./routes");
+
 // mongo 
 // var Mongoose = require('mongoose');
 // var db = Mongoose.createConnection('localhost', 'parkingapp');
@@ -80,6 +82,8 @@ app.use(express.static(path.join(__dirname, 'static')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+app.get('/', routes.index);
 
 //TODO : grab all entries from DB and return database
 
