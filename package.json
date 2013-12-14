@@ -9,6 +9,8 @@
     "express": "3.4.4",
     "jade": "*",
     "request": "*",
-    "async": "*"
+    "async": "*",
+    "mongodb": ">= 0.9.6-7",
+    "mongoose" : ">= 3.6"
   }
 }
