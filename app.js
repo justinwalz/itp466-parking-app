@@ -8,6 +8,10 @@ var path = require('path');
 var request = require('request');
 var async = require('async');
 
+// mongo 
+var Mongoose = require('mongoose');
+var db = Mongoose.createConnection('localhost', 'parkingapp')
+
 // create our app using express
 var app = express();
 
@@ -71,6 +75,8 @@ app.use(express.static(path.join(__dirname, 'static')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+//TODO : grab all entries from DB and return database
 
 // get the sample database
 app.get('/sample.json', function(req, res) {
@@ -145,6 +151,7 @@ app.post('/add', function(req, res) {
           "startTime" : startTime,
           "endTime" : endTime
         };
+        //add database call to push
         trueDatabase.spots.push(newItem);
 
         // assuming always ok
