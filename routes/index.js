@@ -4,6 +4,8 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  var vars = { 
+    title: 'Welcome to Parq' 
+  };
+  res.render('index', vars);
 };
-

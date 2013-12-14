@@ -1,5 +1,41 @@
-extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+doctype 5
+html(ng-app="parkingApp")
+	head
+		meta(charset="utf-8")
+		title= title
+		link(rel='stylesheet', href='/lib/css/bootstrap.css')
+		style.
+			body {margin-top:60px}
+			#submit {margin: 10px 0px}
+			input {margin-top:5px}
+			#box {border: 1px solid black;}
+
+	body(ng-controller="ParkingCtrl")
+		nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+			#container
+				#navbar-header
+					a.navbar-brand(href="index.html") Parking App Skeleton
+
+				.collapse.navbar-collapse.navbar-ex1-collapse
+					ul.nav.navbar-nav
+
+
+		.container
+			input(label="Name", type="text", placeholder="Your Name")#name
+			br
+			input(label="Address", type="text", placeholder="Address")#address
+			br
+			input(label="Price", type="text", placeholder="Price")#price
+			br
+			input(label="Start", type="text", placeholder="Start Time")#startTime
+			br
+			input(label="End", type="text", placeholder="End Time")#endTime
+			br
+			button#submit.btn.btn-primary(ng-click="addLocation()", type="button") Submit
+
+			h2 From Db...
+			#db No Data...
+
+			script(type="text/javascript", src="lib/js/angular.js")
+			script(type="text/javascript", src="js/controllers.js")
