@@ -9,8 +9,13 @@ var request = require('request');
 var async = require('async');
 
 // mongo 
-var Mongoose = require('mongoose');
-var db = Mongoose.createConnection('localhost', 'parkingapp')
+// var Mongoose = require('mongoose');
+// var db = Mongoose.createConnection('localhost', 'parkingapp');
+//var mongo   = require('mongoskin');
+//var DB = 'localhost:3000/parqdb'
+//var COLL = 'spaces'
+
+//spacesColl = mongo.db(DB, { safe: true }).collection(COLL)
 
 // create our app using express
 var app = express();
@@ -151,8 +156,12 @@ app.post('/add', function(req, res) {
           "startTime" : startTime,
           "endTime" : endTime
         };
-        //add database call to push
+        //TODO add database call to push
         trueDatabase.spots.push(newItem);
+        //parqColl.insert(newItem, {}, function() {
+          //res.send("Inserted space!"); 
+        //});
+
 
         // assuming always ok
         var response = {
