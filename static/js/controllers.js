@@ -26,7 +26,6 @@ function ParkingCtrl($scope, $http) {
     var payload = {
       "name" : name,
       "address" : address,
-      "latlng" : [ 34.0272891, -118.2796585], //hardcoded for now.
       "price" : price,
       "startTime" : startTime,
       "endTime" : endTime
@@ -46,7 +45,7 @@ function ParkingCtrl($scope, $http) {
 function render($scope, $http) {
   $http.get('/sample.json').success(function(data) {
     $scope.sample = data;
-    var html = "There are " + data.spots.length + " people in the database <br>";
+    var html = "There are " + data.data.spots.length + " people in the database <br>";
     html += "<table border='1px;padding:5px'>";
     html += "<tr>";
     html += "<th>Name</th>";
@@ -55,14 +54,14 @@ function render($scope, $http) {
     html += "<th>Start Time</th>";
     html += "<th>End Time</th>";
     html += "</tr>";
-    for (var i=0; i<data.spots.length; i++) {
+    for (var i=0; i<data.data.spots.length; i++) {
       //html += "<strong>Person " + i + "</strong><br>"
       html += "<tr>";
-      html += "<td>" + data.spots[i].name + "</td>";
-      html += "<td>" + data.spots[i].address + "</td>";
-      html += "<td>" + data.spots[i].price + "</td>";
-      html += "<td>" + data.spots[i].startTime + "</td>";
-      html += "<td>" + data.spots[i].endTime + "</td>";
+      html += "<td>" + data.data.spots[i].name + "</td>";
+      html += "<td>" + data.data.spots[i].address + "</td>";
+      html += "<td>" + data.data.spots[i].price + "</td>";
+      html += "<td>" + data.data.spots[i].startTime + "</td>";
+      html += "<td>" + data.data.spots[i].endTime + "</td>";
       html += "</tr>";
 
     }
