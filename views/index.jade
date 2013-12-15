@@ -38,6 +38,10 @@ html(ng-app="parkingApp")
 			h2 From Db...
 			#db No Data...
 
+			input(label="Row to Reserve", type="text", placeholder="Id to Reserve")#index
+			br
+			button#reserve.btn.btn-primary(ng-click="reserveSpot()", type="button") Reserve
+
 			br
 			br
 			p ------

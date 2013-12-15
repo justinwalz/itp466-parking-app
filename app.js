@@ -144,6 +144,7 @@ app.post('/add', function(req, res) {
 }); // end app.post()
 
 app.post('/reserve', function(req, res) {
+
   body = req.body;
 
   var id = body.id;
@@ -159,6 +160,10 @@ app.post('/reserve', function(req, res) {
     "status": "ok"
   };
   res.json(response);
+
+  console.log("reserving " + req.body.id + "...");
+  
+  
 
 });
 
