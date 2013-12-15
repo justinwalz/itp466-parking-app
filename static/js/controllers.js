@@ -37,9 +37,31 @@ function ParkingCtrl($scope, $http) {
       // render the db again
       render($scope, $http);
     });
-
-
   }
+
+  // function called when submit button pressed to add location
+  $scope.reserveSpot = function() {
+    // get all elements
+    var index = document.getElementById("index").value;
+
+    console.log("reserving " + index);
+
+    // TODO: client side validation
+
+    // TODO: geocode the new latlng
+
+    var payload = {
+      "id" : index
+    };
+
+    // Send post request to server to insert into DB
+    $http.post('/reserve', payload).success(function() {
+      console.log("Successful post");
+      // render the db again
+      render($scope, $http);
+    });
+  }
+
 }
 
 function render($scope, $http) {

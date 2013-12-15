@@ -144,7 +144,9 @@ app.post('/add', function(req, res) {
 }); // end app.post()
 
 app.post('/reserve', function(req, res) {
-
+  console.log("reserving " + req.body.id + "...");
+  
+  
 });
 
 function errorResponse(error, res) {
