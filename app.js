@@ -128,9 +128,9 @@ app.post('/add', function(req, res) {
         });
 
 
-        // assuming always ok
+        // assuming always confirmed
         var response = {
-          "status": "ok"
+          "status": "confirmed"
         };
         res.json(response);
 
@@ -155,15 +155,25 @@ app.post('/reserve', function(req, res) {
   }
 
   spacesColl.update({UUID : id }, {$set:{reserved: true }}, function(err) {
-    if (err){ console.log("error updating"); }
-    else { console.log("reserving " + id +"...");}
+    if (err){ 
+      console.log("error updating"); 
+      // if not good to go
+      var response = {
+        "status": "error"
+      };
+      res.json(response);
+    }
+    else { 
+      console.log("reserving " + id +"...");
+      // if good to go
+      var response = {
+        "status": "confirmed"
+      };
+      res.json(response);
+    }
   });
 
-  // assuming always ok
-  var response = {
-    "status": "ok"
-  };
-  res.json(response);
+  
 
   
   
