@@ -144,6 +144,21 @@ app.post('/add', function(req, res) {
 }); // end app.post()
 
 app.post('/reserve', function(req, res) {
+  body = req.body;
+
+  var id = body.id;
+
+  spacesColl.update(
+    { UUID: id },
+    { $set: { reserved: true } },
+    { multi: false}
+  );
+
+  // assuming always ok
+  var response = {
+    "status": "ok"
+  };
+  res.json(response);
 
 });
 
