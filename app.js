@@ -24,55 +24,15 @@ var app = express();
 
 spacesColl = mongo.db(DB, { safe: true }).collection(COLL)
 
-/* This is default data before a real database is built */
-var steve = {
-  "UUID" : "1",
-  "name" : "Steve Jobs",
-  "address" : "707 W. 28th Street, Los Angeles CA 90007",
-  "latlng" : [ 34.0272891, -118.2796585],
-  "price" : 10,
-  "startTime" : "12",
-  "endTime" : "16"
-};
-
-var cindy = {
-  "UUID" : "2",
-  "name" : "Cindy Smith",
-  "address" : "667 W. 28th Street, Los Angeles CA 90007",
-  "latlng" : [ 34.0272142, -118.2792991],
-  "price" : 15,
-  "startTime" : "9",
-  "endTime" : "10"
-};
-
-var joe = {
-  "UUID" : "3",
-  "name" : "Joe Shmoe",
-  "address" : "653 W. 28th Street, Los Angeles CA 90007",
-  "latlng" : [ 34.027166, -118.278965],
-  "price" : 8,
-  "startTime" : "18",
-  "endTime" : "21"
-};
-
-var database = {
-	"spots": [
-		steve, 
-		cindy,
-		joe
-	]
-};
-
-var trueDatabase = {
-  "spots": []
-}
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'super-duper-secret-secret' }));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
@@ -87,17 +47,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-//TODO : grab all entries from DB and return database
-
-// get the sample database
 app.get('/sample.json', function(req, res) {
-	// send back default data
-  /** if (trueDatabase.spots.length > 0) {
-    res.json(trueDatabase);
-  } else {
-    res.json(database);    
-  }
-  */
   spacesColl.find({}).toArray(function(err, items) {
     if(err) {
       return res.send(err);
@@ -198,6 +148,10 @@ app.post('/add', function(req, res) {
     }
   })  
 }); // end app.post()
+
+app.post('/reserve', function(req, res) {
+
+});
 
 function errorResponse(error, res) {
   console.log(error);
