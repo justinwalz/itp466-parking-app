@@ -147,13 +147,17 @@ app.post('/reserve', function(req, res) {
 
   body = req.body;
 
-  var id = body.id;
+  //has to be casted into an int...damnit
+  var id = parseInt(body.id,10);
 
-  spacesColl.update(
-    { UUID: id },
-    { $set: { reserved: true } },
-    { multi: false}
-  );
+  if (!id) {
+    errorResponse("Invalid /reserve: No id", res);
+  }
+
+  spacesColl.update({UUID : id }, {$set:{reserved: true }}, function(err) {
+    if (err){ console.log("error updating"); }
+    else { console.log("reserving " + id +"...");}
+  });
 
   // assuming always ok
   var response = {
@@ -161,7 +165,7 @@ app.post('/reserve', function(req, res) {
   };
   res.json(response);
 
-  console.log("reserving " + req.body.id + "...");
+  
   
   
 
