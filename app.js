@@ -11,16 +11,18 @@ var async = require('async');
 var routes = require("./routes");
 
 // mongo 
-// var Mongoose = require('mongoose');
+ var Mongoose = require('mongoose');
 // var db = Mongoose.createConnection('localhost', 'parkingapp');
-//var mongo   = require('mongoskin');
-//var DB = 'localhost:3000/parqdb'
-//var COLL = 'spaces'
+var mongo   = require('mongoskin');
+var DB = 'localhost:27017/parqdb'
+var COLL = 'spaces'
 
-//spacesColl = mongo.db(DB, { safe: true }).collection(COLL)
+
 
 // create our app using express
 var app = express();
+
+spacesColl = mongo.db(DB, { safe: true }).collection(COLL)
 
 /* This is default data before a real database is built */
 var steve = {
@@ -90,11 +92,21 @@ app.get('/', routes.index);
 // get the sample database
 app.get('/sample.json', function(req, res) {
 	// send back default data
-  if (trueDatabase.spots.length > 0) {
+  /** if (trueDatabase.spots.length > 0) {
     res.json(trueDatabase);
   } else {
     res.json(database);    
   }
+  */
+  spacesColl.find({}).toArray(function(err, items) {
+    if(err) {
+      return res.send(err);
+    }
+    var spots = {
+      "spots": items
+    }
+    res.json(spots);
+  });
 });
 
 // add to the database
@@ -162,9 +174,9 @@ app.post('/add', function(req, res) {
         };
         //TODO add database call to push
         trueDatabase.spots.push(newItem);
-        //parqColl.insert(newItem, {}, function() {
-          //res.send("Inserted space!"); 
-        //});
+        spacesColl.insert(newItem, {}, function() {
+          res.send("Inserted space!"); 
+        });
 
 
         // assuming always ok
