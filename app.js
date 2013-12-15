@@ -145,7 +145,11 @@ app.post('/add', function(req, res) {
   console.log(price + " from " + startTime + " to " + endTime);
 
   // build fields
-  var nextId = database.spots.length + 1;
+  // var nextId = database.spots.length + 1;
+
+  var nextId = spacesColl.find().count(function(err,count){
+      nextId = count + 1; 
+  });
   // geocodable address
   var geoAddress = address.split(' ').join('+');
 
@@ -170,7 +174,8 @@ app.post('/add', function(req, res) {
           "latlng" : [ location.lat, location.lng],
           "price" : price,
           "startTime" : startTime,
-          "endTime" : endTime
+          "endTime" : endTime,
+          "reserved" : false
         };
         //TODO add database call to push
         trueDatabase.spots.push(newItem);
