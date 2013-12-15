@@ -11,13 +11,9 @@ var async = require('async');
 var routes = require("./routes");
 
 // mongo 
- var Mongoose = require('mongoose');
-// var db = Mongoose.createConnection('localhost', 'parkingapp');
 var mongo   = require('mongoskin');
 var DB = 'localhost:27017/parqdb'
 var COLL = 'spaces'
-
-
 
 // create our app using express
 var app = express();
@@ -95,7 +91,6 @@ app.post('/add', function(req, res) {
   console.log(price + " from " + startTime + " to " + endTime);
 
   // build fields
-  // var nextId = database.spots.length + 1;
 
   var nextId = spacesColl.find().count(function(err,count){
       nextId = count + 1; 
@@ -127,8 +122,7 @@ app.post('/add', function(req, res) {
           "endTime" : endTime,
           "reserved" : false
         };
-        //TODO add database call to push
-        trueDatabase.spots.push(newItem);
+        // add to spaces collection
         spacesColl.insert(newItem, {}, function() {
           res.send("Inserted space!"); 
         });
