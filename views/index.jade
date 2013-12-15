@@ -3,20 +3,14 @@ doctype 5
 html(ng-app="parkingApp")
 	head
 		meta(charset="utf-8")
-		title= title
 		link(rel='stylesheet', href='/lib/css/bootstrap.css')
 		style.
-			body {margin-top:60px}
+			body {margin-top:60px; font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;}
+			th {padding: 5px}
+			td {padding: 5px}
 			#submit {margin: 10px 0px}
 			input {margin-top:5px}
 			#box {border: 1px solid black;}
-		script.
-			alert(#{session})
-			if (#{session}) {
-				alert("signed in");
-			} else {
-				alert("not signed in... " + #{session});
-			}
 
 	body(ng-controller="ParkingCtrl")
 		nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
