@@ -53,6 +53,7 @@ function render($scope, $http) {
     html += "<th>Price</th>";
     html += "<th>Start Time</th>";
     html += "<th>End Time</th>";
+    html += "<th>Reserved?</th>"
     html += "</tr>";
     for (var i=0; i<data.spots.length; i++) {
       //html += "<strong>Person " + i + "</strong><br>"
@@ -62,6 +63,7 @@ function render($scope, $http) {
       html += "<td>" + data.spots[i].price + "</td>";
       html += "<td>" + data.spots[i].startTime + "</td>";
       html += "<td>" + data.spots[i].endTime + "</td>";
+      html += "<td>" + data.spots[i].reserved + "</td>";
       html += "</tr>";
 
     }
