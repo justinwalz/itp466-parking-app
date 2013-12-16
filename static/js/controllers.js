@@ -65,7 +65,7 @@ function ParkingCtrl($scope, $http) {
 }
 
 function render($scope, $http) {
-  $http.get('/sample.json').success(function(data) {
+  $http.get('/spots').success(function(data) {
     $scope.sample = data;
     var html = "There are " + data.spots.length + " people in the database <br>";
     html += "<table border='1px;padding:5px'>";

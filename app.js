@@ -43,7 +43,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-app.get('/sample.json', function(req, res) {
+app.get('/spots', function(req, res) {
   spacesColl.find({}).toArray(function(err, items) {
     if(err) {
       return res.send(err);
